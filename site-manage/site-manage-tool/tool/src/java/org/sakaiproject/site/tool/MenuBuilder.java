@@ -72,6 +72,7 @@ public class MenuBuilder
      */
     public enum SiteInfoActiveTab
     {
+        COURSE_DATES,
         SITE_INFO,
         EDIT_SITE_INFO,
         MANAGE_TOOLS,
@@ -88,6 +89,8 @@ public class MenuBuilder
         IMPORT_FROM_ARCHIVE,
         USER_AUDIT_LOG
     }
+
+    
 
     /**
      * Enumerate the possible choices in the Membership menu bar
@@ -187,7 +190,7 @@ public class MenuBuilder
      * @param site
      * @param rl
      * @param siteTypeProvider
-     * @param activeTab
+* @param activeTab
      */
     public static void buildMenuForSiteInfo( VelocityPortlet portlet, RunData data, SessionState state, Context context, Site site, ResourceLoader rl,
                                                         SiteTypeProvider siteTypeProvider, SiteInfoActiveTab activeTab )
@@ -225,10 +228,21 @@ public class MenuBuilder
             menu.add( buildMenuEntry( rl.getString( "java.edittools" ), "doMenu_edit_site_tools", activeTab.equals( SiteInfoActiveTab.MANAGE_TOOLS ) ) );
 
             // If the page order helper is available, not stealthed and not hidden, show the link
-            if( SiteAction.notStealthOrHiddenTool( "sakai-site-pageorder-helper" ) )
+            if( SiteAction.notStealthOrHiddenTool( "sakai-site-coursedates-helper" ) )
             {
                 // In particular, need to check site types for showing the tool or not
                 if( SiteAction.isPageOrderAllowed( siteType, siteProperties.getProperty( SiteConstants.SITE_PROPERTY_OVERRIDE_HIDE_PAGEORDER_SITE_TYPES ) ) )
+                {
+                    // 'Course Dates'
+                    menu.add( buildMenuEntry( rl.getString( "java.coursedates" ), "doMenu_edit_course_dates", activeTab.equals( SiteInfoActiveTab.COURSE_DATES ) ) );
+                }
+            }
+
+            // If the page order helper is available, not stealthed and not hidden, show the link
+            if( SiteAction.notStealthOrHiddenTool( "sakai-site-pageorder-helper" ) )
+            {
+                // In particular, need to check site types for showing the tool or not
+                    if( SiteAction.isPageOrderAllowed( siteType, siteProperties.getProperty( SiteConstants.SITE_PROPERTY_OVERRIDE_HIDE_PAGEORDER_SITE_TYPES ) ) )
                 {
                     // 'Tool Order'
                     menu.add( buildMenuEntry( rl.getString( "java.orderpages" ), "doPageOrderHelper", activeTab.equals( SiteInfoActiveTab.TOOL_ORDER ) ) );

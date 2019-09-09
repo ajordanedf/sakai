@@ -8289,6 +8289,30 @@ private Map<String,List> getTools(SessionState state, String type, Site site) {
 
 	} // doMenu_edit_site_tools
 
+       /**
+	 * doMenu_edit_course_dates
+	 * 
+	 */
+	public void doMenu_edit_course_dates(RunData data) {
+		SessionState state = ((JetspeedRunData) data)
+				.getPortletSessionState(((JetspeedRunData) data).getJs_peid());
+
+		// Clean up state on our first entry from a shortcut
+		String panel = data.getParameters().getString("panel");
+		if ( "Shortcut".equals(panel) ) cleanState(state);
+
+		// get the tools
+		siteToolsIntoState(state);
+
+		if (state.getAttribute(STATE_MESSAGE) == null) {
+			state.setAttribute(STATE_TEMPLATE_INDEX, "4");
+			if (state.getAttribute(STATE_INITIALIZED) == null) {
+				state.setAttribute(STATE_OVERRIDE_TEMPLATE_INDEX, "4");
+			}
+		}
+
+	} // doMenu_edit_course_dates
+        
 	/**
 	 * doMenu_edit_site_access
 	 * 

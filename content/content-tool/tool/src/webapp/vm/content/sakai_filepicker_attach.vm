@@ -681,10 +681,38 @@
 											$tlang.getString("cloudstorage.link")
 										</th>
 									</tr>
+									
+									<div id="jstree_demo_div">
+									
+									
+									        <script type="text/javascript">
+												var json= $.getJSON('https://api.myjson.com/bins/g6hv3');
+													$(function() {
+														$(function() {
+															$('#container').jstree({
+																'core' : {
+																	data: function (node, cb) {
+																		var url = 'https://api.myjson.com/bins/g6hv3';
+																		if (node.id !== '#') url = 'https://api.myjson.com/bins/192g4v';
+																		$.ajax({
+																			url: url,
+																			data: function (node) {
+																				return {'id' : node.id};
+																			}
+																		}).done(function (data) {
+																			debugger;
+																			cb(data.contentajax_collection[0].data);
+																		});
+																	}
+																}
+															});
 
-									<div id="jstree_demo_div"></div>
-
-
+														})
+													});
+											</script>
+									
+									
+									</div>
 									#foreach($googledriveItem in $googledriveItems)
 										#set($itemcount = $itemcount + 1)
 										#set ($width = "$!{googledriveItem.depth}${unit}")
