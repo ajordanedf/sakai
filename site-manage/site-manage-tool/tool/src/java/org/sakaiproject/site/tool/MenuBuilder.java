@@ -234,7 +234,7 @@ public class MenuBuilder
                 if( SiteAction.isPageOrderAllowed( siteType, siteProperties.getProperty( SiteConstants.SITE_PROPERTY_OVERRIDE_HIDE_PAGEORDER_SITE_TYPES ) ) )
                 {
                     // 'Course Dates'
-                    menu.add( buildMenuEntry( rl.getString( "java.coursedates" ), "doMenu_edit_course_dates", activeTab.equals( SiteInfoActiveTab.COURSE_DATES ) ) );
+                    menu.add( buildMenuEntry( rl.getString( "java.coursedates" ), "doCourseDatesHelper", activeTab.equals( SiteInfoActiveTab.COURSE_DATES ) ) );
                 }
             }
 
