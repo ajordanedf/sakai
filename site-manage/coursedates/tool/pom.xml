@@ -9,9 +9,9 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <name>sakai-site-pageorder-helper</name>
+    <name>sakai-site-coursedates-helper</name>
     <groupId>org.sakaiproject.sitemanage</groupId>
-    <artifactId>sakai-site-pageorder-helper</artifactId>
+    <artifactId>sakai-site-coursedates-helper</artifactId>
     <packaging>war</packaging>
 
     <dependencies>

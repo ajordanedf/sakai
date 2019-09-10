@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<registration>
+    <tool id="sakai.ace_widget_assignments"
+        title="My assignments"
+        description="This is a simple tool that show a list of assignments">
+
+        <!--  This tool will be made available to the following site types via Site Info > Edit Tools -->
+        <category name="course" />
+        <category name="project" />
+
+        <configuration name="help.button" value="false" />
+        <configuration name="reset.button" value="false" />
+        <configuration name="suppressTitle" value="true" />
+
+    </tool>
+</registration>

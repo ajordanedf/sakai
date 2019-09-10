@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <registration>
-	<tool id="sakai-site-pageorder-helper"
+	<tool id="sakai-site-coursedates-helper"
 		title="Page Order Helper"
 		description="Site Page Order Helper Tool">
 		<category name="sakai.helper" />
