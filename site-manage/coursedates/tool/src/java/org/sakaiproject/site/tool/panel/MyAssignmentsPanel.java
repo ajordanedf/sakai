@@ -23,7 +23,6 @@ import org.apache.wicket.markup.repeater.data.ListDataProvider;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.sakaiproject.ace_widget_assignments.api.model.SimpleAssignment;
 /**
  *
  */
@@ -35,7 +34,7 @@ public class MyAssignmentsPanel extends Panel {
     public MyAssignmentsPanel(String id) {
         super(id);
         
-        Label noResultsMsg = new Label("noAssignmentsMsg", Model.of("There are no upcoming assignments on this group."));
+        Label noResultsMsg = new Label("Hola mundoooooooooooooo", Model.of("There are no upcoming assignments on this group."));
         add(noResultsMsg);
     }
 
