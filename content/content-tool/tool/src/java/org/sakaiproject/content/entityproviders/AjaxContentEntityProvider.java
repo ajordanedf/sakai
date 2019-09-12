@@ -58,15 +58,15 @@ public class AjaxContentEntityProvider extends AbstractEntityProvider implements
 
             if (googledriveCollectionId == null) {
                 System.out.println("------------1------------");
-                //children = googleDriveService.getDriveRootItems(userDirectoryService.getCurrentUser().getId());
-                children = googleDriveService.getDriveRootItems("16b4ba7b-4f8e-4638-aea1-cda106a3070a");
+                children = googleDriveService.getDriveRootItems(userDirectoryService.getCurrentUser().getId());
+                 //children = googleDriveService.getDriveRootItems("16b4ba7b-4f8e-4638-aea1-cda106a3070a");
 
             } else {
                 System.out.println("------------2------------");
                 int depth = 0;
                 if (params.get("googledriveCollectionDepth") != null) depth = Integer.parseInt(params.get("googledriveCollectionDepth").toString());
-                //children = googleDriveService.getDriveChildrenItems(userDirectoryService.getCurrentUser().getId(), googledriveCollectionId, depth);
-                children = googleDriveService.getDriveChildrenItems("16b4ba7b-4f8e-4638-aea1-cda106a3070a", googledriveCollectionId, depth);
+                children = googleDriveService.getDriveChildrenItems(userDirectoryService.getCurrentUser().getId(), googledriveCollectionId, depth);
+                //children = googleDriveService.getDriveChildrenItems("16b4ba7b-4f8e-4638-aea1-cda106a3070a", googledriveCollectionId, depth);
             }
 
             for (GoogleDriveItem child : children) {
