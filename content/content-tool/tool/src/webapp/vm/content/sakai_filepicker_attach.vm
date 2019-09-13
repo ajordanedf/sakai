@@ -80,6 +80,8 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 				"selector": "a",
 				"event": "click",
 				"callback": function(node_id, node, action_id, action_el){
+					//console.log(node_id, node, action_id, action_el);
+						return doattachsubmitgoogledrive(node.id,true);
 					
 				}
 			});
@@ -148,6 +150,9 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function(event){ 
+			$('#resourceTabs').find('.fa.fa-google').parent().parent().tab('show');
+			$('.container_filepicker .active').removeClass('active');
+			$('.container_filepicker #pickerGoogleDrive').addClass('active');
 			$('#resourceTabs a').click(function (e) {
 				e.preventDefault();
 				$(this).tab('show');
@@ -661,7 +666,7 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 												#if ($onedriveItem.isFolder())
 													#set($folderClass = "fa fa-folder-o")
 													#if($onedriveItem.hasChildren() && !$onedriveItem.isExpanded())
-														#set($folderClass = "fa fa-folder")
+														#set($folderClass = "fa fa-folder") 
 													#elseif($onedriveItem.hasChildren() && $onedriveItem.isExpanded())
 														#set($folderClass = "fa fa-folder-open")
 													#end
