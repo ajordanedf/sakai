@@ -3,15 +3,17 @@ package org.sakaiproject.content.entityproviders;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.json.simple.JSONArray;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import org.sakaiproject.component.api.ServerConfigurationService;
+import org.sakaiproject.content.api.ContentTypeImageService;
 import static org.sakaiproject.content.tool.FilePickerAction.STATE_GOOGLEDRIVE_CHILDREN;
 import static org.sakaiproject.content.tool.FilePickerAction.STATE_GOOGLEDRIVE_ITEMS;
-
 import org.sakaiproject.entitybroker.EntityReference;
 import org.sakaiproject.entitybroker.EntityView;
 import org.sakaiproject.entitybroker.entityprovider.EntityProvider;
@@ -36,6 +38,7 @@ public class AjaxContentEntityProvider extends AbstractEntityProvider implements
     @Getter @Setter private GoogleDriveService googleDriveService;
     @Getter @Setter private UserDirectoryService userDirectoryService;
     @Getter @Setter private SessionManager sessionManager;
+    @Getter @Setter private ContentTypeImageService contentTypeImageService;
 
     @Override
     public String getEntityPrefix() {
@@ -75,6 +78,8 @@ public class AjaxContentEntityProvider extends AbstractEntityProvider implements
                 jsonState.put("opened", child.isExpanded());
                 jsonState.put("selected", child.isExpanded());
                 jsonObj.put("state", jsonState);
+                if (child.getIcon() != null) jsonObj.put("icon", child.getIcon());
+                else jsonObj.put("icon", contentTypeImageService.getContentTypeImageClass(child.getMimeType()));
                 if (child.isFolder()) {
                     jsonObj.put("children", true);
                 }

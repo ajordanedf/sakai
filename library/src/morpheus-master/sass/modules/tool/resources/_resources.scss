@@ -335,20 +335,21 @@
 
 .jstree-container-ul.jstree-children{
     li{
+		// display: flex;
         .fa-link{
             margin: 0 10px 0 10px;
         }
         .fa-files-o{
             margin-left: 10px;
         }
-        @media(min-width: 1460px){
-            display: flex;
-            a{
-                margin-right: auto;
-            }
-            & .fa-link{
-            margin-right: 75%;
-            }
-        }
+        // @media #{$tablet} {
+        //     display: flex;
+        //     a{
+        //         margin-right: auto;
+        //     }
+        //     & .fa-link{
+        //     	margin-right: 75%;
+        //     }
+        // }
     }
 }

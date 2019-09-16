@@ -32,6 +32,7 @@
         <property name="googleDriveService" ref="org.sakaiproject.googledrive.service.GoogleDriveService"/>
         <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService"/>
         <property name="sessionManager" ref="org.sakaiproject.tool.api.SessionManager"/>
+        <property name="contentTypeImageService" ref="org.sakaiproject.content.api.ContentTypeImageService"/>
  </bean>
     
 </beans>

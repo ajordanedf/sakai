@@ -68,7 +68,7 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 				"selector": "a",
 				"event": "click",
 				"callback": function(node_id, node, action_id, action_el){
-					console.log("callback", node_id, action_id);
+					return doattachsubmitgoogledrive(node.id, true);
 				}
 			});
 			mytree.jstree(true).add_action("all", {
@@ -80,9 +80,7 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 				"selector": "a",
 				"event": "click",
 				"callback": function(node_id, node, action_id, action_el){
-					//console.log(node_id, node, action_id, action_el);
-						return doattachsubmitgoogledrive(node.id,true);
-					
+					return doattachsubmitgoogledrive(node.id, true);
 				}
 			});
 		});
