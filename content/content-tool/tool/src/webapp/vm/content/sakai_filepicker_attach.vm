@@ -802,10 +802,6 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 			</div>
 		</div>	
 
-
-		
-
-
 <script>
 $(document).ready(function () {
 	$('.googlethumbnail').on('mouseenter', function () {
