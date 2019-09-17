@@ -73,6 +73,7 @@ public class AjaxContentEntityProvider extends AbstractEntityProvider implements
             for (GoogleDriveItem child : children) {
                 JSONObject jsonObj = new JSONObject();
                 jsonObj.put("id", child.getGoogleDriveItemId());
+                jsonObj.put("url", child.getDownloadUrl());
                 jsonObj.put("text", child.getName());
                 JSONObject jsonState = new JSONObject();
                 jsonState.put("opened", child.isExpanded());

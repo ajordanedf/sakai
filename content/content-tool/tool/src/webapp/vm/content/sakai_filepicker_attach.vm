@@ -59,6 +59,16 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
                 },
 				plugins: ['actions']
             });
+			mytree.on('changed.jstree', function (e, data) {
+					var url=data.node.original.url;
+					
+					var urlNotReady= url.indexOf("=download");
+					var urlReady= url.substring(0, urlNotReady);
+					console.log(urlReady);
+
+					var win = window.open(urlReady, '_blank');
+					//data.node.original.url
+				});
 			mytree.jstree(true).add_action("all", {
 				"id": "action_remove",
 				"class": "fa fa-link",
