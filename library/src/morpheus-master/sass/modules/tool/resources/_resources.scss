@@ -342,18 +342,11 @@
         .fa-files-o{
             margin-left: 10px;
         }
-        // @media #{$tablet} {
-        //     display: flex;
-        //     a{
-        //         margin-right: auto;
-        //     }
-        //     & .fa-link{
-        //     	margin-right: 75%;
-        //     }
-        // }
-		[background-image *= 'url("https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.folder")']{
-			background-color:red;
-		}
     }
 }
 
+.jstree-closed{
+	.fa-files-o, .fa-link{
+		display: none !important;
+	}
+}
