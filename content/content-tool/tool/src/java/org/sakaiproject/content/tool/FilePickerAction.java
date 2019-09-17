@@ -154,6 +154,7 @@ public class FilePickerAction extends PagedResourceHelperAction
 	private static TimeService timeService = ComponentManager.get(TimeService.class);
 	private static OneDriveService onedriveService = ComponentManager.get(OneDriveService.class);
 	private static GoogleDriveService googledriveService = ComponentManager.get(GoogleDriveService.class);
+        //private static String STATE_NAVIGATING_FOCUSES="";
 
 	/** State attribute for where there is at least one attachment before invoking attachment tool */
 	public static final String STATE_HAS_ATTACHMENT_BEFORE = "attachment.has_attachment_before";
@@ -1921,6 +1922,7 @@ public class FilePickerAction extends PagedResourceHelperAction
 		state.removeAttribute(STATE_GOOGLEDRIVE_CHILDREN);
 		state.removeAttribute(STATE_NAVIGATING_RESOURCES);
 		state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
+                //state.setAttribute(STATE_NAVIGATING_FOCUSES, state);
 		googledriveService.cleanGoogleDriveCacheForUser(userDirectoryService.getCurrentUser().getId());
                 System.out.println("---------------doRefreshGoogleDrive");
 	}

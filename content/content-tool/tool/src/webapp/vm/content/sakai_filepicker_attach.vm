@@ -60,13 +60,20 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 				plugins: ['actions']
             });
 			mytree.on('changed.jstree', function (e, data) {
-					var url=data.node.original.url;
-					
-					var urlNotReady= url.indexOf("=download");
-					var urlReady= url.substring(0, urlNotReady);
-					console.log(urlReady);
+					if(data.node.original.view.includes('/edit')){
+						var urleditable= data.node.original.view;
+						var win2 = window.open(urleditable, '_blank');
+					}
 
-					var win = window.open(urlReady, '_blank');
+					if(data.node.original.url != null){
+						var urlImages=data.node.original.url;
+						var urlNotReady= urlImages.indexOf("=download");
+						var urlReady= urlImages.substring(0, urlNotReady);
+						var win = window.open(urlReady, '_blank');
+					}
+
+
+
 					//data.node.original.url
 				});
 			mytree.jstree(true).add_action("all", {
