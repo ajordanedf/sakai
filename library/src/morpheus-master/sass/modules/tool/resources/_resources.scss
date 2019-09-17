@@ -345,6 +345,12 @@
     }
 }
 
+.jstree-node {
+	&:not(.jstree-leaf) > .fa {
+		display: none;
+	}
+}
+
 .jstree-closed{
 	.fa-files-o, .fa-link{
 		display: none !important;
