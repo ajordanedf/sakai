@@ -85,7 +85,7 @@ includeLatestJQuery('sakai_filepicker_attach.vm');
 				"selector": "a",
 				"event": "click",
 				"callback": function(node_id, node, action_id, action_el){
-					return doattachsubmitgoogledrive(node.id, true);
+					return doattachsubmitgoogledrive(node.id, false);
 				}
 			});
 			mytree.jstree(true).add_action("all", {
