@@ -1897,8 +1897,11 @@ public class FilePickerAction extends PagedResourceHelperAction
 			item.setIconClass(typedef.getIconClass(attachment));
 			new_items.add(item);
 			toolSession.setAttribute(STATE_HELPER_CHANGED, Boolean.TRUE.toString());
-                        System.out.println("----------state.removeAttribute(STATE_NAVIGATING_ONEDRIVE)");
-			state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
+			state.setAttribute(STATE_NAVIGATING_GOOGLEDRIVE, true);
+                        state.removeAttribute(STATE_GOOGLEDRIVE_ITEMS);
+                        state.removeAttribute(STATE_GOOGLEDRIVE_CHILDREN);
+                        state.removeAttribute(STATE_NAVIGATING_RESOURCES);
+                        state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
 		} catch(Exception e) {
 			log.error("doAttachGoogleDrive : {}", e.getMessage());
 		} finally{
@@ -1924,7 +1927,6 @@ public class FilePickerAction extends PagedResourceHelperAction
 		state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
                 //state.setAttribute(STATE_NAVIGATING_FOCUSES, state);
 		googledriveService.cleanGoogleDriveCacheForUser(userDirectoryService.getCurrentUser().getId());
-                System.out.println("---------------doRefreshGoogleDrive");
 	}
 
 	/**
