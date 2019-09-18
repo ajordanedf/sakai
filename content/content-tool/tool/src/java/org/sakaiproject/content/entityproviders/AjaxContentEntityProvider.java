@@ -82,7 +82,12 @@ public class AjaxContentEntityProvider extends AbstractEntityProvider implements
                 jsonState.put("opened", child.isExpanded());
                 jsonState.put("selected", child.isExpanded());
                 jsonObj.put("state", jsonState);
-                if (child.getIcon() != null) jsonObj.put("icon", child.getIcon());
+                if(child.getDownloadUrl() == null){
+                    JSONObject cssClass = new JSONObject();
+                    cssClass.put("class", "no-attach");
+                    jsonObj.put("li_attr", cssClass);
+                }
+                if (child.getIcon() != null) jsonObj.put("icon", child.getIcon()); 
                 else jsonObj.put("icon", contentTypeImageService.getContentTypeImageClass(child.getMimeType()));
                 if (child.isFolder()) {
                     jsonObj.put("children", true);
