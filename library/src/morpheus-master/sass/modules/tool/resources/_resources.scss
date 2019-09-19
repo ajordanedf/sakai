@@ -357,8 +357,6 @@
 	}
 }
 
-.no-attach{
-	.fa-files-o{
-		display: none;
-	}
+.no-attach 	> .fa-files-o{
+	display: none;
 }

@@ -1288,7 +1288,10 @@ public class FilePickerAction extends PagedResourceHelperAction
 			}
 			if(oi != null) {
 				doAttachGoogleDrive(oi, state, googledriveItemClone);
-			}
+			}else{
+                            oi = googledriveService.getDriveItem(userDirectoryService.getCurrentUser().getId(), googledriveItemId);
+                            doAttachGoogleDrive(oi, state, googledriveItemClone);
+                        }
 		}
 
 		List<AttachItem> removed = (List<AttachItem>) toolSession.getAttribute(STATE_REMOVED_ITEMS);
@@ -1904,6 +1907,7 @@ public class FilePickerAction extends PagedResourceHelperAction
                         state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
 		} catch(Exception e) {
 			log.error("doAttachGoogleDrive : {}", e.getMessage());
+                        e.printStackTrace();
 		} finally{
 			disableSecurityAdvisors();
 		}
