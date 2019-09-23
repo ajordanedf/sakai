@@ -1275,19 +1275,7 @@ public class FilePickerAction extends PagedResourceHelperAction
 			if(oi != null) {
 				doAttachOneDrive(oi, state, onedriveItemClone);
 			}
-		} else if (googledriveOn && StringUtils.isNotBlank(googledriveItemId)) {
-			boolean googledriveItemClone = params.getBoolean("googledriveItemClone");
-			List<GoogleDriveItem> items = (List<GoogleDriveItem>) toolSession.getAttribute(STATE_GOOGLEDRIVE_ITEMS);
-			GoogleDriveItem oi = null;
-			for(GoogleDriveItem off : items) {
-				if(googledriveItemId.equals(off.getGoogleDriveItemId())) {
 					oi = off;
-					break;
-				}
-			}
-			if(oi != null) {
-				doAttachGoogleDrive(oi, state, googledriveItemClone);
-			}
 		}
 
 		List<AttachItem> removed = (List<AttachItem>) toolSession.getAttribute(STATE_REMOVED_ITEMS);
@@ -1836,93 +1824,8 @@ public class FilePickerAction extends PagedResourceHelperAction
 		onedriveService.cleanOneDriveCacheForUser(userDirectoryService.getCurrentUser().getId());
 	}
 
-	@SuppressWarnings("unchecked")
-	public void doAttachGoogleDrive(GoogleDriveItem googledriveItem, SessionState state, boolean googledriveItemClone) {
 		ToolSession toolSession = sessionManager.getCurrentToolSession();
-		ContentHostingService contentService = (ContentHostingService) toolSession.getAttribute (STATE_CONTENT_SERVICE);
-		ResourceTypeRegistry registry = (ResourceTypeRegistry) toolSession.getAttribute(STATE_RESOURCES_TYPE_REGISTRY);
-		List<AttachItem> new_items = (List<AttachItem>) toolSession.getAttribute(STATE_ADDED_ITEMS);
-		if(new_items == null) {
-			new_items = new Vector<AttachItem>();
-			toolSession.setAttribute(STATE_ADDED_ITEMS, new_items);
-		}
-		
-		try {
-			ContentResource attachment = null;
-			ResourcePropertiesEdit newprops = contentService.newResourceProperties();
-			String contentType = googledriveItem.getMimeType();
-			String filename = googledriveItem.getName();
-			String resourceId = Validator.escapeResourceName(filename);
-			String siteId = toolManager.getCurrentPlacement().getContext();
-			String toolName = (String) toolSession.getAttribute(STATE_ATTACH_TOOL_NAME);
-			if(toolName == null) {
-				toolName = toolManager.getCurrentPlacement().getTitle();
-			}
-			enableSecurityAdvisor();
-			String typeId = ResourceType.TYPE_UPLOAD;
-			newprops.addProperty(ResourceProperties.PROP_DISPLAY_NAME, filename);
-			newprops.addProperty(ResourceProperties.PROP_DESCRIPTION, filename);
-			if(googledriveItemClone) {
-				String max_file_size_mb = (String) toolSession.getAttribute(STATE_FILE_UPLOAD_MAX_SIZE);
-				long max_bytes = 1024L * 1024L;
-				try {
-					max_bytes = Long.parseLong(max_file_size_mb) * 1024L * 1024L;
-				} catch(Exception e) {
-					max_file_size_mb = "1";
-					max_bytes = 1024L * 1024L;
-				}
-				if(googledriveItem.getSize() >= max_bytes) {
-					addAlert(state, trb.getFormattedMessage("size.exceeded", new Object[]{ max_file_size_mb }));
-					return;
-				}
-				InputStream contentStream = new URL(googledriveItem.getDownloadUrl()).openStream();
-				attachment = contentService.addAttachmentResource(resourceId, siteId, toolName, contentType, contentStream, newprops);
-			} else {
-				contentType = ResourceProperties.TYPE_URL;
-				attachment = contentService.addAttachmentResource(resourceId, siteId, toolName, contentType, googledriveItem.getViewUrl().getBytes(), newprops);
-			}
-
-			String displayName = filename;
-			String containerId = contentService.getContainingCollectionId(attachment.getId());
-			String accessUrl = attachment.getUrl();
-			log.debug("GoogleDrive item accessUrl {}", accessUrl);
-			AttachItem item = new AttachItem(attachment.getId(), displayName, containerId, accessUrl);
-			item.setContentType(contentType);
-			typeId = attachment.getResourceType();
-			item.setResourceType(typeId);
-			ResourceType typedef = registry.getType(typeId);
-			item.setHoverText(typedef.getLocalizedHoverText(attachment));
-			item.setIconLocation(typedef.getIconLocation(attachment));
-			item.setIconClass(typedef.getIconClass(attachment));
-			new_items.add(item);
-			toolSession.setAttribute(STATE_HELPER_CHANGED, Boolean.TRUE.toString());
-			state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
-		} catch(Exception e) {
-			log.error("doAttachGoogleDrive : {}", e.getMessage());
-		} finally{
-			disableSecurityAdvisors();
-		}
-		toolSession.setAttribute(STATE_ADDED_ITEMS, new_items);
-	}
-
-	public void doRevokeGoogleDrive(RunData data) {
-		SessionState state = ((JetspeedRunData)data).getPortletSessionState (((JetspeedRunData)data).getJs_peid ());
-		state.setAttribute(STATE_NAVIGATING_GOOGLEDRIVE, true);
-		state.removeAttribute(STATE_NAVIGATING_RESOURCES);
-		state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
-		googledriveService.revokeGoogleDriveConfiguration(userDirectoryService.getCurrentUser().getId());
-	}
-
-	public void doRefreshGoogleDrive(RunData data) {
-		SessionState state = ((JetspeedRunData)data).getPortletSessionState (((JetspeedRunData)data).getJs_peid ());
-		state.setAttribute(STATE_NAVIGATING_GOOGLEDRIVE, true);
-		state.removeAttribute(STATE_GOOGLEDRIVE_ITEMS);
-		state.removeAttribute(STATE_GOOGLEDRIVE_CHILDREN);
-		state.removeAttribute(STATE_NAVIGATING_RESOURCES);
-		state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
-		googledriveService.cleanGoogleDriveCacheForUser(userDirectoryService.getCurrentUser().getId());
-	}
-
+                        state.removeAttribute(STATE_NAVIGATING_ONEDRIVE);
 	/**
 	 * @param itemId
 	 * @param state
