@@ -20,7 +20,7 @@
 --%>
 -->
 <div class="table-responsive">
-  <h:dataTable styleClass="table table-striped" id="TreeTable" value="#{questionpool.qpools}" var="pool">
+  <h:dataTable id="TreeTable" styleClass="table table-striped table-bordered" value="#{questionpool.qpools}" var="pool">
     <h:column id="col1">
 
      <f:facet name="header">
@@ -247,3 +247,10 @@ lydial: in 2.2, use Display Name instead of ownerId, since ownerId now returns t
     </h:column>
   </h:dataTable>
 </div>
+
+<script>
+  $(document).ready(function () {
+  $('#TreeTable').DataTable();
+  $('.table.table-striped.table-bordered').addClass('bs-select');
+  });
+</script>

@@ -40,7 +40,7 @@
   </h:panelGroup>	 
   <br/>
   <div class="tier1">
-   <h:dataTable styleClass="table table-striped" value="#{sectionActivity.sectionActivityDataList}" var="pageData">
+   <h:dataTable id="bootstrapTable" styleClass="table table-striped table-bordered" value="#{sectionActivity.sectionActivityDataList}" var="pageData">
 	 <!-- Title.. -->
 	 <h:column rendered="#{sectionActivity.sortType != 'assessmentName'}">
 	  <f:facet name="header">
@@ -279,3 +279,9 @@
 </html>
 </f:view>
 
+<script>
+  $(document).ready(function () {
+  $('#bootstrapTable').DataTable();
+  $('.table.table-striped.table-bordered').addClass('bs-select');
+  });
+</script>

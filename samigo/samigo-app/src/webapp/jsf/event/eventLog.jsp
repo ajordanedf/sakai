@@ -64,7 +64,7 @@
  </div>
 
  <div class="table-responsive">
- <h:dataTable styleClass="table table-striped" value="#{eventLog.eventLogDataList}" var="log">
+ <h:dataTable id="bootstrapTable" styleClass="table table-striped table-bordered" value="#{eventLog.eventLogDataList}" var="log">
   <!-- Assessment Title... -->
     <h:column>
     <f:facet name="header">
@@ -228,3 +228,9 @@
 </html>
   </f:view>
 
+<script>
+  $(document).ready(function () {
+  $('#bootstrapTable').DataTable();
+  $('.table.table-striped.table-bordered').addClass('bs-select');
+  });
+</script>

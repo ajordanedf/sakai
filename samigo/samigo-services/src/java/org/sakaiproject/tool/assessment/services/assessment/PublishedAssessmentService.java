@@ -91,6 +91,21 @@ public class PublishedAssessmentService extends AssessmentService{
 	  getBasicInfoOfAllPublishedAssessments2(orderBy, ascending, siteId);
   }
 
+    
+  public ArrayList getBasicInfoOfAllArchivedPublishedAssessments2(String orderBy,
+		  boolean ascending, String siteId) {
+	  
+	  return PersistenceService.getInstance().
+	  getPublishedAssessmentFacadeQueries().
+	  getBasicInfoOfAllArchivedPublishedAssessments2(orderBy, ascending, siteId);
+  }
+  
+  public void restoreArchivedPublishedAssessments(ArrayList<Long> publishedAssessmentsIds) {	  
+	  PersistenceService.getInstance().
+	  getPublishedAssessmentFacadeQueries().
+	  restoreArchivedPublishedAssessments(publishedAssessmentsIds);
+  }
+  
   public List getAllActivePublishedAssessments(String orderBy) {
       return getAllPublishedAssessments(orderBy, PublishedAssessmentFacade.ACTIVE_STATUS);
   }

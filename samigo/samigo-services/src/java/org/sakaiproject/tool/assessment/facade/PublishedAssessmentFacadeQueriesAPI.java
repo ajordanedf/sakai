@@ -21,6 +21,7 @@
 
 package org.sakaiproject.tool.assessment.facade;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -257,6 +258,10 @@ public interface PublishedAssessmentFacadeQueriesAPI
   public List getContainRandomPartAssessmentIds(Collection assessmentIds);
   
   public PublishedItemData getFirstPublishedItem(Long publishedAssessmentId);
+
+  public ArrayList getBasicInfoOfAllArchivedPublishedAssessments2(String orderBy, boolean ascending, String siteId);
+  
+  public void restoreArchivedPublishedAssessments(ArrayList<Long> publishedAssessmentsIds);
 
   public List getPublishedItemIds(Long publishedAssessmentId);
 

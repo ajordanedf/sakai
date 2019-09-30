@@ -318,6 +318,13 @@ public class PublishedAssessmentData
     this.lastModifiedDate = lastModifiedDate;
   }
 
+  public PublishedAssessmentData(Long id, Date startDate, String title) {
+    this.assessmentBaseId = id;
+    this.title = title;    
+    this.startDate = startDate;	      
+  }
+
+
   public Long getAssessmentId() {
     return this.assessmentId;
   }

@@ -1496,6 +1496,73 @@ public class PublishedAssessmentFacadeQueries extends HibernateDaoSupport implem
 		return assessmentList;
 	}
 
+	// This is for instructors view (restore published assessments page)
+	public ArrayList getBasicInfoOfAllArchivedPublishedAssessments2(
+			String sortString, boolean ascending, final String siteAgentId) {
+		String orderBy = getOrderBy(sortString);
+				
+		String query = "select new PublishedAssessmentData(p.publishedAssessmentId, c.startDate, p.title)"			
+			+ " from PublishedAssessmentData p, PublishedAccessControl c, AuthorizationData z  "
+			+ " where c.assessment.publishedAssessmentId = p.publishedAssessmentId "
+			+ " and p.publishedAssessmentId=z.qualifierId and z.functionId=:functionId "
+			+ " and z.agentIdString=:siteId and p.status=:inactiveStatus "
+			+ " order by p." + orderBy;
+			
+		if (ascending == true)
+			query += " asc";
+		else
+			query += " desc";
+
+		final String hql = query;
+		final HibernateCallback<List> hcb = session -> session
+                        .createQuery(hql)
+                        .setString("functionId", "OWN_PUBLISHED_ASSESSMENT")
+                        .setString("siteId", siteAgentId)
+                        .setInteger("inactiveStatus", 2)
+                        .list();
+		List list = getHibernateTemplate().execute(hcb);
+                
+		ArrayList pubList = new ArrayList(list);			
+		
+		return pubList;
+	}
+	
+	public void restoreArchivedPublishedAssessments(ArrayList<Long> publishedAssessmentsIds)
+	{
+		String listPublishedAssessmentsIds = "";
+
+		if(publishedAssessmentsIds.size() == 1)
+			listPublishedAssessmentsIds += publishedAssessmentsIds.get(0);
+		else
+		{			
+			boolean first = true;
+			for (Long s : publishedAssessmentsIds)
+			{
+				if(first)
+				{
+					listPublishedAssessmentsIds += s;
+					first = false;
+				}
+				else
+					listPublishedAssessmentsIds += ","+s;					
+			}
+		}
+		
+		final String query = "";
+		
+		final HibernateCallback hcb = session -> session
+                        .createQuery("update PublishedAssessmentData p set p.status=1 where p.publishedAssessmentId in (:listPublishedAssessmentsIds)")
+                        .setParameterList("listPublishedAssessmentsIds", publishedAssessmentsIds);
+		getHibernateTemplate().execute(hcb);
+	}
+	
+	/**
+	 * return an array list of the last AssessmentGradingFacade per assessment
+		}
+		return assessmentList;
+	}
+
+
 	/**
 	 * total submitted for grade returns HashMap (Long publishedAssessmentId,
 	 * Integer totalSubmittedForGrade);

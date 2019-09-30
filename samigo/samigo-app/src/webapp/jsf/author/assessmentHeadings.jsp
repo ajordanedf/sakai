@@ -76,6 +76,17 @@
                         <h:outputText value="#{generalMessages.section_activity}" />
                         <f:actionListener type="org.sakaiproject.tool.assessment.ui.listener.author.SectionActivityListener" />
                     </h:commandLink>
+                    
+                    <f:verbatim></span></li></f:verbatim>
+                    <f:verbatim><li role="menuitem" ><span></f:verbatim>
+
+                        <h:commandLink title="#{generalMessages.t_restore_published_assessments}" action="getRestorePublishedAssessments" immediate="true" rendered="#{authorization.adminAssessment}">
+                        <h:outputText value="#{generalMessages.restore_published_assessments}" />
+                        <f:actionListener type="org.sakaiproject.tool.assessment.ui.listener.author.RestorePublishedAssessmentsListener" />
+                        </h:commandLink>	
+                        
+                    <f:verbatim></span></li></ul></f:verbatim>
+
                 </span>
             </li>
         </h:panelGroup>

@@ -553,6 +553,12 @@
     <managed-bean-class>org.sakaiproject.tool.assessment.ui.bean.misc.SimpleFormLoginBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
   </managed-bean>
+    <managed-bean>
+    <description>To manage some configurations based on restore published assessments</description>
+    <managed-bean-name>restorePublishedAssessmentsBean</managed-bean-name>
+    <managed-bean-class>org.sakaiproject.tool.assessment.ui.bean.author.RestorePublishedAssessmentsBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
   <managed-bean>
     <description> Question Pool backing bean.</description>
     <managed-bean-name>questionpool</managed-bean-name>
@@ -970,6 +976,11 @@
     <navigation-case>
       <from-outcome>addMatchItem</from-outcome>
       <to-view-id>/jsf/test/stub.jsp</to-view-id>
+    </navigation-case>
+    	<!-- RESTORE PUBLISHED ASSESSMENTS -->
+	  <navigation-case>
+      <from-outcome>getRestorePublishedAssessments</from-outcome>
+      <to-view-id>/jsf/author/restorePublishedAssessments.jsp</to-view-id>
     </navigation-case>
     <navigation-case>
       <from-outcome>addMatchItemMatch</from-outcome>
